@@ -17,9 +17,9 @@ variable "github_branch" {
 }
 
 variable "aws_region" {
-  description = "Primary AWS region for S3 and Route 53 records."
+  description = "Primary AWS region for S3. Defaults to us-east-1 to co-locate with the ACM cert (which CloudFront requires there)."
   type        = string
-  default     = "us-east-2"
+  default     = "us-east-1"
 }
 
 variable "tags" {
