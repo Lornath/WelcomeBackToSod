@@ -960,6 +960,12 @@ pre.code {
   font-style: italic;
 }
 
+.site-footer .last-updated {
+  margin-top: 8px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 /* ---------- ZG calculator ---------- */
 
 .calculator {

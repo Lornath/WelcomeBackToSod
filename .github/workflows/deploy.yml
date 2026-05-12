@@ -19,6 +19,14 @@ jobs:
     environment: Deploy
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Stamp last-updated date
+        run: |
+          LAST_UPDATED=$(git log -1 --format=%cs -- src/)
+          echo "Stamping last-updated: $LAST_UPDATED"
+          sed -i "s/__LAST_UPDATED__/${LAST_UPDATED}/g" src/index.html src/sitemap.xml
 
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
