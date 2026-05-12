@@ -19,7 +19,7 @@
       } else {
         root.removeAttribute('data-theme');
       }
-      try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }
+      try { localStorage.setItem('theme', next); } catch { /* ignore */ }
     });
   }
 

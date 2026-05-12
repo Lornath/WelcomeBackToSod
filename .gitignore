@@ -1,2 +1,12 @@
 _reference
 _shutter_encoder
+
+# Node
+node_modules/
+
+# Terraform
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.*
+infra/*.tfvars
+infra/crash.log

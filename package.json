@@ -1,0 +1,19 @@
+{
+  "name": "welcomebacktosod",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Welcome (Back) to SoD — a static guide site for World of Warcraft Classic: Season of Discovery.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "lint": "npm run lint:html && npm run lint:js && npm run lint:links",
+    "lint:html": "html-validate \"src/**/*.html\"",
+    "lint:js": "eslint src scripts",
+    "lint:links": "node scripts/check-links.mjs"
+  },
+  "devDependencies": {
+    "eslint": "^9.18.0",
+    "globals": "^15.14.0",
+    "html-validate": "^9.3.1"
+  }
+}
