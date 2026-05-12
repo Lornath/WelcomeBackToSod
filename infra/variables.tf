@@ -10,10 +10,10 @@ variable "github_repo" {
   default     = "Lornath/WelcomeBackToSod"
 }
 
-variable "github_branch" {
-  description = "Branch in the GitHub repo permitted to deploy."
+variable "github_environment" {
+  description = "GitHub Actions environment name permitted to deploy. The deploy job sets `environment: <name>` and GitHub's OIDC token rewrites `sub` to `repo:<repo>:environment:<name>`."
   type        = string
-  default     = "main"
+  default     = "Deploy"
 }
 
 variable "aws_region" {
