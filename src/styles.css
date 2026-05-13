@@ -283,7 +283,8 @@ body::before {
   color: var(--gold-bright);
 }
 
-.theme-toggle {
+.theme-toggle,
+.share-btn {
   background: transparent;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
@@ -300,10 +301,16 @@ body::before {
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.share-btn:hover {
   color: var(--gold-bright);
   border-color: var(--gold);
   background: var(--hover-tint);
+}
+
+.share-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .theme-toggle .icon-light,
@@ -1208,12 +1215,12 @@ pre.code {
     font-size: 17px;
   }
 
-  .header-links a {
+  .header-links a:not(.share-btn) {
     display: none;
   }
 
   .header-links {
-    gap: 0;
+    gap: 6px;
   }
 }
 
