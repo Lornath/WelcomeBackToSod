@@ -940,6 +940,13 @@ pre.code {
     width: 140px;
     margin: 8px 0;
   }
+
+  main table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* addons / links */
