@@ -933,10 +933,12 @@ pre.code {
   background: var(--bg-2);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1024px) {
   .hero-video {
-    width: 110px;
-    top: 16px;
+    position: static;
+    display: block;
+    width: 140px;
+    margin: 8px 0;
   }
 }
 
@@ -1221,6 +1223,21 @@ pre.code {
 
   .header-links {
     gap: 6px;
+  }
+
+  .site-header {
+    height: auto;
+    min-height: var(--header-h);
+    padding: 6px 14px;
+    gap: 8px;
+  }
+
+  .brand-sub {
+    display: none;
+  }
+
+  .brand-title {
+    font-size: 15px;
   }
 }
 
