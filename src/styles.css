@@ -872,8 +872,23 @@ main table.kv-table {
   letter-spacing: 0.06em;
 }
 
+.class-card h4 {
+  margin: 12px 0 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
 .class-card p {
-  margin: 0;
+  margin: 0 0 4px;
+}
+
+.class-card p:last-child {
+  margin-bottom: 0;
 }
 
 /* code */

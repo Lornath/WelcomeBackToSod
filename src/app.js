@@ -41,9 +41,6 @@
 
   // -------- scroll-spy --------
   const tocLinks = Array.from(document.querySelectorAll('.toc a[href^="#"]'));
-  const sections = tocLinks
-    .map((a) => document.getElementById(a.getAttribute('href').slice(1)))
-    .filter(Boolean);
 
   const linkBySection = new Map();
   tocLinks.forEach((a) => {
@@ -57,19 +54,81 @@
     if (link) link.classList.add('active');
   }
 
-  if ('IntersectionObserver' in window && sections.length) {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        // pick the entry closest to the top that is intersecting
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top);
-        if (visible.length) setActive(visible[0].target.id);
-      },
-      { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+  // For each TOC entry, pick an element whose bounding box reflects the section's
+  // visible extent. Headings inside a .class-card have near-zero height and share
+  // their vertical position with siblings in the same grid row, so observe the
+  // card instead.
+  const sectionData = tocLinks
+    .map((a) => {
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return null;
+      const el = target.closest('.class-card') || target;
+      return { id, el };
+    })
+    .filter(Boolean);
+
+  // BAND_Y must be at or below the scroll-anchor landing position of a section,
+  // which is scroll-padding-top + scroll-margin-top (~140px with the current
+  // CSS). 160 leaves a little headroom; small h3 anchors land higher (~64px)
+  // and are caught easily.
+  const BAND_Y = 160;
+
+  function updateActive() {
+    if (!sectionData.length) return;
+
+    // Sections whose top has scrolled to or past the band line. Using "top
+    // passed" rather than "box contains band" so short class cards and tiny
+    // h3 anchors qualify the same way as full sections.
+    const candidates = sectionData.filter(
+      ({ el }) => el.getBoundingClientRect().top <= BAND_Y
     );
-    sections.forEach((s) => obs.observe(s));
+    if (!candidates.length) return;
+
+    // Drop entries whose box contains another entry in the same set, so a
+    // parent <section> doesn't outrank a child card / sub-heading.
+    const leaves = candidates.filter(
+      (x) => !candidates.some((y) => y !== x && x.el.contains(y.el))
+    );
+
+    // Hash preference: clicking a TOC link should stick even when multiple
+    // siblings share the band (grid row of cards).
+    const hashId = location.hash.slice(1);
+    const hashed = hashId ? leaves.find((s) => s.id === hashId) : null;
+    if (hashed) {
+      setActive(hashed.id);
+      return;
+    }
+
+    // Among leaves, pick the one whose top is closest to the band line from
+    // above (i.e. the most recently passed). Ties (grid row siblings) go to
+    // the first in DOM order because the loop only updates on strict >.
+    let pick = null;
+    let pickTop = -Infinity;
+    for (const l of leaves) {
+      const top = l.el.getBoundingClientRect().top;
+      if (top > pickTop) {
+        pickTop = top;
+        pick = l;
+      }
+    }
+    if (pick) setActive(pick.id);
   }
+
+  let scheduled = false;
+  function onScroll() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      updateActive();
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', updateActive);
+  window.addEventListener('hashchange', updateActive);
+  updateActive();
 
   // -------- reputation helpers (shared) --------
   // Standings (cumulative bar size for each level)
