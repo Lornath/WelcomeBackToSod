@@ -45,6 +45,7 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
+  <!-- #region Header -->
   <header class="site-header">
     <button class="nav-toggle" id="navToggle" type="button" aria-controls="toc" aria-expanded="false"
       aria-label="Toggle navigation">
@@ -82,8 +83,10 @@
       </button>
     </nav>
   </header>
+  <!-- #endregion -->
 
   <div class="layout">
+    <!-- #region Sidebar / TOC -->
     <aside class="sidebar" id="toc" aria-label="Table of contents">
       <nav>
         <ol class="toc">
@@ -158,8 +161,10 @@
         </ol>
       </nav>
     </aside>
+    <!-- #endregion -->
 
     <main id="main" tabindex="-1">
+      <!-- #region Welcome / Hero -->
       <section class="hero" id="top">
         <div class="hero-inner">
           <p class="eyebrow">Season of Discovery</p>
@@ -184,8 +189,10 @@
           </div>
         </div>
       </section>
+      <!-- #endregion -->
 
 
+      <!-- #region Leveling 1-60 -->
       <!-- ===================== LEVELING ===================== -->
       <section id="leveling" class="section">
         <h2>Leveling 1-60</h2>
@@ -379,7 +386,9 @@
           wowhead guide</a>.
 
       </section>
+      <!-- #endregion -->
 
+      <!-- #region At Level 60 / Endgame Prep -->
       <!-- ===================== ENDGAME ===================== -->
       <section id="endgame" class="section">
         <h2>You hit 60. Now what?</h2>
@@ -923,15 +932,26 @@
           </tbody>
         </table>
 
+
         <h3 id="se-prep">Scarlet Enclave Prep</h3>
+
+        <p><strong>No attunement</strong> is required to enter SE.</p>
+
+        <strong>Three important things:</strong>
+        <ul>
+          <li>Start the quest chain for the scarlet enclave bosses</li>
+          <li>Get your scarlet disguise</li>
+          <li>Do the weekly quest for the <a href="https://www.wowhead.com/classic/item=242465/jostled-chalice-fragment"
+              target="_blank" rel="noopener noreferrer">Jostled Chalice
+              Fragment</a> - this gives <strong>FREE T3.5 tier pieces</strong> over time</li>
+        </ul>
+
+        <h4>Scarlet Enclave Quest chain</h4>
 
         Your goal here is to get your <a href="https://www.wowhead.com/classic-ptr/item=243229/hearthstone-of-the-dawn"
           target="_blank" rel="noopener noreferrer">Hearthstone of the Dawn</a> after your first full clear of the new
-        Scarlet
-        Enclave raid.
-        <p><strong>No attunement</strong> is required to enter SE.</p>
+        Scarlet Enclave raid.
 
-        <h4>Quest line</h4>
         <p>There is the quest chain starting at <a
             href="https://www.wowhead.com/classic/quest=87498/the-scarlet-reclamation" target="_blank"
             rel="noopener noreferrer">The Scarlet
@@ -943,13 +963,36 @@
           time. There are two followups inside SE - you'll want to visit and return to <a
             href="https://www.wowhead.com/classic/npc=239337/lord-maxwell-tyrosus" target="_blank"
             rel="noopener noreferrer">Lord Maxwell Tyrosus</a> inside the
-          SE jail as you progress.</p>
+          SE jail as you progress.
+        <div class="callout">Please note while it's safe to hand in and accept quests from the NPCs inside the
+          instance, please DO NOT
+          choose any other dialog options or talk to non-quest NPCs, this can seriously grief the raid by disabling a
+          large raid-wide buff.
+        </div>
+        </p>
 
-
+        <h4>Scarlet Uniform and Disguise</h4>
+        <p>
+          As you're doing these SE quests, you'll eventually get to <a
+            href="https://www.wowhead.com/classic/quest=90510/new-avalon" target="_blank" rel="noopener noreferrer">New
+            Avalon</a> which gives you a
+          <a href="https://www.wowhead.com/classic/item=237020/scarlet-insignia" target="_blank"
+            rel="noopener noreferrer">Scarlet Insignia</a>. You'll need four pieces of the Scarlet Uniform crafted gear
+          (ex: <a href="https://www.wowhead.com/classic/item=238264/scarlet-augurs-hood" target="_blank"
+            rel="noopener noreferrer">Scarlet Augur's Hood</a>)
+          then you can use the insignia to make the New Avalon NPCs friendly. There's a set for cloth, leather, mail and
+          plate wearers.
+        </p>
+        <p>They count as both <strong>Scarlet Uniform</strong> and <strong>Sanctified</strong> gear.</p>
+        <p>
+          Any tailor / leatherworker / blacksmith can learn the recipes and craft them inside of New Avalon. The recipes
+          and the crafted gear are usually available in the auction house, or from your friendly guild crafters. You'll
+          need to get this disguise to do jostled chalice fragment quest (see below).
+        </p>
         <p> There's a <a href="https://www.wowhead.com/classic/guide/season-of-discovery/scarlet-uniform-crafting"
             target="_blank" rel="noopener noreferrer">full breakdown at Wowhead</a></p>
 
-        <h4>Shattered Trophy Fragment</h4>
+        <h4>Jostled Chalice Fragment</h4>
         <p>Every <strong>3 weeks</strong> you are guaranteed a free SE tier piece. By doing the weekly Prove Your Worth:
           quest at <a href="https://www.wowhead.com/classic/npc=240248/bryon-steelblade" target="_blank"
             rel="noopener noreferrer">Byron
@@ -958,7 +1001,7 @@
             target="_blank" rel="noopener noreferrer">Scarlet Junkbox</a> which has at least one <a
             href="https://www.wowhead.com/classic/item=242465/jostled-chalice-fragment" target="_blank"
             rel="noopener noreferrer">Jostled Chalice
-            Fragment</a>. Three of those turn into a <a
+            Fragment</a> (and a bunch of reals). Three of those turn into a <a
             href="https://www.wowhead.com/classic/item=239117/crusaders-chalice" target="_blank"
             rel="noopener noreferrer">Crusader's Chalice</a>
           which you can hand in for a tier piece (disguise required).
@@ -967,26 +1010,38 @@
             href="https://www.wowhead.com/classic/item=237020/scarlet-insignia" target="_blank"
             rel="noopener noreferrer">Scarlet Insignia</a> to
           turn on your disguise</p>
-        <div class="callout">If you're crafting the scarlet blues, you'll need <a
+        <div class="callout">If you're crafting the scarlet uniform blues, you'll need <a
             href="https://www.wowhead.com/classic/item=12938/blood-of-heroes" target="_blank"
             rel="noopener noreferrer">Blood of Heroes</a> for
-          some of them. Here's a tip to finding the bloods using <a href="https://www.curseforge.com/wow/addons/questie"
-            target="_blank" rel="noopener noreferrer">Questie</a>:
+          some of them. I used to recommend using <a href="https://www.curseforge.com/wow/addons/questie"
+            target="_blank" rel="noopener noreferrer">Questie</a>'s advanced search to show them on the map, but it
+          doesn't cover the ones in New Avalon.
+          Here's a better way:
           <ul>
-            <li>Open your map ("m")</li>
-            <li>Right click the Questie icon and select "Advanced Search"</li>
-            <li>Search for "blood of heroes" (or just "ood of h")</li>
-            <li>Under the "Items (1)" tab select Blood of Heroes on the left and click the "Show on Map" button on the
-              right</li>
-            <li>Your map and minimap will now show all of the pickup locations in WPL and EPL</li>
+            <li>Install the <a href="https://www.curseforge.com/wow/addons/tomtom" target="_blank"
+                rel="noopener noreferrer">TomTom</a> addon</li>
+            <li>On the <a href="https://www.wowhead.com/classic/object=176213/blood-of-heroes" target="_blank"
+                rel="noopener noreferrer">Blood of Heroes</a>
+              wowhead page, click any of the pins the map and under "Copy All" select "TomTom Command"</li>
+            <li>In the game, type <b>/ttpaste</b> in chat and paste in the copied coordinates. Click the "Paste" button
+              to close.</li>
+            <li>Now you have (almost) all of the New Avalon blood locations!</li>
+            <li>Run in a loop in New Avalon, they seem to spawn here WAY more frequently than outside in EPL</li>
           </ul>
-          Dying while looting them? If your class has a way to break movement speed debuffs use it and run away.
+          Dying while looting them? If your class has a way to break movement speed debuffs (druid shape-shift, priest
+          <a href="https://www.wowhead.com/classic/spell=425294/dispersion" target="_blank"
+            rel="noopener noreferrer">dispersion</a>, pally <a
+            href="https://www.wowhead.com/classic/spell=1044/blessing-of-freedom" target="_blank"
+            rel="noopener noreferrer">BoF</a>, etc) use it and run
+          away.
           Otherwise pop a <a href="https://www.wowhead.com/classic/item=5634/free-action-potion" target="_blank"
             rel="noopener noreferrer">Free
-            Action Potion</a> before looting (and still run away).
+            Action Potion</a> before looting.
         </div>
       </section>
+      <!-- #endregion -->
 
+      <!-- #region Reputation -->
       <!-- ===================== REPUTATION ===================== -->
       <section id="reputation" class="section">
         <h2>Reputation</h2>
@@ -1195,7 +1250,9 @@
         </div>
 
       </section>
+      <!-- #endregion -->
 
+      <!-- #region Travel Shortcuts -->
       <!-- ===================== TRAVEL ===================== -->
       <section id="travel" class="section">
         <h2>SoD Travel Shortcuts</h2>
@@ -1243,7 +1300,9 @@
           </li>
         </ul>
       </section>
+      <!-- #endregion -->
 
+      <!-- #region Cool SoD Things -->
       <!-- ===================== COOL THINGS ===================== -->
       <section id="cool-stuff" class="section">
         <h2>Cool SoD Things</h2>
@@ -1427,9 +1486,15 @@
           <li><strong>a mailbox</strong> - scrolls in cart by main archway entrance</li>
           <li><strong>a bank</strong> - boxes in keep to left, opposite of where weekly quest is</li>
           <li><strong>an alchemy bench</strong> - alchemists rejoice! in basement of keep</li>
+          <li><strong>neutral AH</strong> - sometimes <a
+              href="https://www.wowhead.com/classic/npc=242827/captain-bloodcoin" target="_blank"
+              rel="noopener noreferrer">Captain Bloodcoin</a> will be up
+            down at the docks</li>
         </ul>
       </section>
+      <!-- #endregion -->
 
+      <!-- #region Class Specifics -->
       <!-- ===================== CLASS SPECIFICS ===================== -->
       <section id="class-specifics" class="section">
         <h2>Class Specifics</h2>
@@ -1441,10 +1506,32 @@
                 rel="noopener noreferrer">Dalton's
                 Horn</a></p>
             <h4>Pally Power</h4>
-            <p>Pallies - make sure you get the <a
-                href="https://www.curseforge.com/wow/addons/pally-power" target="_blank" rel="noopener noreferrer">Pally
+            <p>Pallies - make sure you get the <a href="https://www.curseforge.com/wow/addons/pally-power"
+                target="_blank" rel="noopener noreferrer">Pally
                 Power</a> addon or you will be
               mercilessly mocked in raids.</p>
+            <h4>Truthbearer Enchant</h4>
+            <p>
+              Wondering what happens if you put a 2H enchant on your brand new <a
+                href="https://www.wowhead.com/classic/item=229749/truthbearer" target="_blank"
+                rel="noopener noreferrer">Truthbear</a>
+              and transform it to 1H mode? Good news! You don't lose the 2H enchant. But if you put one of the newer 2H
+              enchants (ex: <a href="https://www.wowhead.com/classic/spell=1231139/enchant-2h-weapon-grand-arcanist"
+                target="_blank" rel="noopener noreferrer">Grand Arcanist</a>)
+              on it, it'll behave like the 1H equivalent (ex: <a
+                href="https://www.wowhead.com/classic/spell=1231164/enchant-weapon-grand-sorceror" target="_blank"
+                rel="noopener noreferrer">Grand
+                Sorcerer</a>)
+            <div class="source">Thanks Sethmilchick for testing!</div>
+            </p>
+            <h4>Leg rune - don't forget to CAST IT</h4>
+            <p>
+              So, this is really embarassing - for the longest time on my pally I thought the leg rune that breaks fear
+              and
+              sleep <a href="https://www.wowhead.com/classic/spell=407880/inspiration-exemplar" target="_blank"
+                rel="noopener noreferrer">Inspiration
+                Exemplar</a> didn't work. Turns out, just having the leg rune on isn't enough - it gives you an ability
+              you have to CAST.</p>
           </div>
           <div class="class-card">
             <h3 id="class-priest">Priest</h3>
@@ -1468,10 +1555,22 @@
           </div>
           <div class="class-card">
             <h3 id="class-mage">Mage</h3>
-            <h4>Battle Rez Scroll</h4>
+            <h4>Resurrection Scroll</h4>
             <p>Be the group hero and resurrect the dead! <a
                 href="https://www.wowhead.com/classic/item=211800/scroll-of-reintegration" target="_blank"
                 rel="noopener noreferrer">Scroll of Reintegration</a>.
+            </p>
+            <h4>Get the good water</h4>
+            <p>
+              Buy a <a href="https://www.wowhead.com/classic/item=231780/tome-of-conjure-water-viii" target="_blank"
+                rel="noopener noreferrer">Tome of Conjure
+                Water VIII</a>
+              from <a href="https://www.wowhead.com/classic/npc=2303/lyranne-feathersong" target="_blank"
+                rel="noopener noreferrer">Lyranne Feathersong</a> in
+              Winterspring (ALLY) or <a href="https://www.wowhead.com/classic/npc=3621/kurll" target="_blank"
+                rel="noopener noreferrer">Kurll</a> in Azshara
+              (HORDE) to be able to make <a href="https://www.wowhead.com/classic/item=231778/mountain-spring-water"
+                target="_blank" rel="noopener noreferrer">Mountain Spring Water</a>
             </p>
           </div>
           <div class="class-card">
@@ -1515,6 +1614,15 @@
               get yourself a <a href="https://www.wowhead.com/classic/npc=4011/young-pridewing" target="_blank"
                 rel="noopener noreferrer">Young Pridewing</a>
             </p>
+            <h4>KC Flare</h4>
+            <p>
+              Tired of switching to melee in Kara Crypts, or standing back in the dark and griefing your healer?
+              You can get an upgraded version of flare via <a
+                href="https://www.wowhead.com/classic/item=237041/tome-of-enchanted-flare" target="_blank"
+                rel="noopener noreferrer">Tome of Enchanted
+                Flare</a>
+              that counts as a light source! Look for a scroll on a table in one of the rooms by the apprentices.
+            </p>
           </div>
           <div class="class-card">
             <h3 id="class-warlock">Warlock</h3>
@@ -1532,7 +1640,8 @@
             </p>
             <h4>Demon Wings</h4>
             <p>The new <a href="https://www.wowhead.com/classic/spell=403789/metamorphosis" target="_blank"
-                rel="noopener noreferrer">demon form</a> is cool and all, but what's better than a tiny little gnome with
+                rel="noopener noreferrer">demon form</a> is cool and all, but what's better than a tiny little gnome
+              with
               wings
               main-tanking raids? At 60, follow the <a
                 href="https://www.wowhead.com/classic/news/warlock-metamorphosis-humanoid-form-found-in-season-of-discovery-how-to-find-353199"
@@ -1546,7 +1655,9 @@
           </div>
         </div>
       </section>
+      <!-- #endregion -->
 
+      <!-- #region End-Game Resources -->
       <!-- ===================== RESOURCES ===================== -->
       <section id="resources" class="section">
         <h2>End-Game Resources</h2>
@@ -1564,7 +1675,9 @@
 
         </ul>
       </section>
+      <!-- #endregion -->
 
+      <!-- #region SoD Addons -->
       <!-- ===================== ADDONS ===================== -->
       <section id="addons" class="section">
         <h2>SoD-Specific Addons</h2>
@@ -1593,7 +1706,9 @@
             Questie.</strong></li>
         </ul>
       </section>
+      <!-- #endregion -->
 
+      <!-- #region About -->
       <section id="about" class="section">
         <h2>About this guide</h2>
         <p>
@@ -1614,7 +1729,9 @@
           </li>
         </ul>
       </section>
+      <!-- #endregion -->
 
+      <!-- #region Feedback -->
       <section id="feedback" class="section section-feedback">
         <h2>Feedback &amp; gaps</h2>
         <p>
@@ -1626,7 +1743,9 @@
             target="_blank" rel="noopener noreferrer">this reddit post</a>
         </p>
       </section>
+      <!-- #endregion -->
 
+      <!-- #region Footer -->
       <footer class="site-footer">
         <p>
           <a href="https://welcomebacktosod.com">welcomebacktosod.com</a> -
@@ -1637,6 +1756,7 @@
           Last updated: <time datetime="__LAST_UPDATED__">__LAST_UPDATED__</time>
         </p>
       </footer>
+      <!-- #endregion -->
     </main>
   </div>
 
