@@ -268,4 +268,51 @@
       updateRow(row);
     });
   }
+
+  // -------- shareable subsection anchors --------
+  // The End-game h4 subsections (Naxx Prep / Scarlet Enclave Prep) each carry
+  // an id but are intentionally left out of the TOC. Give them a hover-revealed
+  // link icon so a permalink (e.g. .../#naxx-attunement) is one click to copy.
+  const anchorIcon =
+    '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" ' +
+    'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" ' +
+    'stroke-linejoin="round">' +
+    '<path d="M10 13a5 5 0 0 0 7.07 0l3-3a5 5 0 1 0-7.07-7.07l-1.72 1.71"/>' +
+    '<path d="M14 11a5 5 0 0 0-7.07 0l-3 3a5 5 0 1 0 7.07 7.07l1.71-1.71"/>' +
+    '</svg>';
+
+  document.querySelectorAll('#endgame h4[id]').forEach((h) => {
+    const link = document.createElement('a');
+    link.className = 'heading-anchor';
+    link.href = '#' + h.id;
+    link.title = 'Copy link to this section';
+    link.setAttribute('aria-label', 'Copy link to ' + h.textContent.trim());
+    link.innerHTML = anchorIcon;
+
+    let resetTimer = null;
+    const flash = () => {
+      link.classList.add('copied');
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => link.classList.remove('copied'), 1200);
+    };
+
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Drop the permalink in the address bar without a jarring re-scroll.
+      history.replaceState(null, '', '#' + h.id);
+      const url = location.href;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(flash, () => {
+          // Clipboard unavailable (e.g. insecure context) — just navigate.
+          location.hash = h.id;
+        });
+      } else {
+        location.hash = h.id;
+        flash();
+      }
+    });
+
+    h.appendChild(link);
+  });
 })();
