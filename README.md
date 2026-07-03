@@ -4,8 +4,8 @@ Static guide site for World of Warcraft Classic: Season of Discovery, hosted at
 [welcomebacktosod.com](https://welcomebacktosod.com).
 
 The site is a single page (`src/index.html` + `src/app.js` + `src/styles.css`)
-plus a couple of media assets. There is no build step — the files in `src/` are
-exactly what gets served.
+plus a couple of media assets. There is no build step - the files in `src/` are
+exactly what gets served and can be hosted locally for development.
 
 ## Layout
 
@@ -25,7 +25,6 @@ python -m http.server 8000
 # open http://localhost:8000
 ```
 
-That's it — no build step, no Node required for runtime.
 
 ## Linting (optional, local)
 
