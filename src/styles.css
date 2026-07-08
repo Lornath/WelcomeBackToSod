@@ -955,7 +955,8 @@ main table.kv-table {
 }
 
 /* code */
-pre.code {
+pre.code,
+pre.code-small {
   background: var(--code-bg);
   border: 1px solid var(--line);
   border-left: 3px solid var(--gold-deep);
@@ -965,6 +966,11 @@ pre.code {
   font-family: 'JetBrains Mono', Menlo, Consolas, monospace;
   font-size: 14px;
   color: var(--ink);
+}
+
+pre.code-small {
+  font-size: 10px;
+  padding: 10px 12px;
 }
 
 /* formula */
