@@ -66,6 +66,15 @@
   /* type scales */
   --font-display: 'Cinzel', 'Trajan Pro', 'Times New Roman', serif;
   --font-body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+
+  /* reputation standing colors */
+  --rep-color--hostile: red;
+  --rep-color--unfriendly: #ee6622;
+  --rep-color--neutral: yellow;
+  --rep-color--friendly: lime;
+  --rep-color--honored: #00ff88;
+  --rep-color--revered: #00ffcc;
+  --rep-color--exalted: cyan;
 }
 
 :root[data-theme="light"] {
@@ -156,6 +165,18 @@
 :root[data-theme="light"] main a.q5,
 :root[data-theme="light"] main a.q6 {
   border-bottom-color: rgba(0, 0, 0, 0.18);
+}
+
+/* The neon rep colors are unreadable on the light background — darken them
+   while keeping each standing's hue recognizable. */
+:root[data-theme="light"] {
+  --rep-color--hostile: #c81e1e;
+  --rep-color--unfriendly: #b35400;
+  --rep-color--neutral: #806a00;
+  --rep-color--friendly: #2e8b00;
+  --rep-color--honored: #00794a;
+  --rep-color--revered: #007567;
+  --rep-color--exalted: #00808f;
 }
 
 * {
@@ -1108,9 +1129,12 @@ pre.code-small {
 }
 
 .calc-grid label {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: minmax(2.5em, auto) auto;
+  align-content: start;
+  align-items: end;
   gap: 4px;
+  line-height: 1.2;
   font-size: 12px;
   color: var(--ink-dim);
   letter-spacing: 0.04em;
@@ -1137,6 +1161,20 @@ pre.code-small {
   outline: none;
   border-color: var(--gold);
   box-shadow: 0 0 0 3px var(--hover-tint);
+}
+
+/* Kill the up/down spinner on number inputs across all calculators */
+.calc-grid input[type="number"],
+.bre-calc-table input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.calc-grid input[type="number"]::-webkit-inner-spin-button,
+.calc-grid input[type="number"]::-webkit-outer-spin-button,
+.bre-calc-table input[type="number"]::-webkit-inner-spin-button,
+.bre-calc-table input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .calc-grid select {
@@ -1167,6 +1205,35 @@ pre.code-small {
   letter-spacing: 0.06em;
   font-size: 14px;
   text-transform: uppercase;
+}
+
+/* colorize the standing name in the "To" column by rep level */
+.calc-table tbody tr[data-target="hostile"] th {
+  color: var(--rep-color--hostile);
+}
+
+.calc-table tbody tr[data-target="unfriendly"] th {
+  color: var(--rep-color--unfriendly);
+}
+
+.calc-table tbody tr[data-target="neutral"] th {
+  color: var(--rep-color--neutral);
+}
+
+.calc-table tbody tr[data-target="friendly"] th {
+  color: var(--rep-color--friendly);
+}
+
+.calc-table tbody tr[data-target="honored"] th {
+  color: var(--rep-color--honored);
+}
+
+.calc-table tbody tr[data-target="revered"] th {
+  color: var(--rep-color--revered);
+}
+
+.calc-table tbody tr[data-target="exalted"] th {
+  color: var(--rep-color--exalted);
 }
 
 .calc-table td {

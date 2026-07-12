@@ -54,6 +54,34 @@ When you add a section or heading to `src/index.html`:
   `<aside class="sidebar">` so the checker doesn't complain.
 - Any new external `<a>` needs `target="_blank"` and `rel="noopener noreferrer"`.
 
+### Easy Wowhead Links with VIM Mode
+
+Enter a wowhead link in the HTML file as follows, with the link and the display name for the item link:
+
+```
+WHLINK:https://www.wowhead.com/classic/item=14047/runecloth:Runecloth:
+```
+
+then add this to your VS Code or equivalent settings.json:
+
+```
+   "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "w",
+                "h"
+            ],
+            "commands": [
+                ":%s#WHLINK:(https?://[^:]+):([^:]+):#<a href=\"\\1\" target=\"_blank\" rel=\"noopener noreferrer\">\\2</a>#g"
+            ]
+        }
+    ]
+```
+
+Now typing `\wh` and hitting `ESC` in normal mode will replace the WHLINK text with HTML.
+
+
 ## Deployment
 
 Pushes to `main` deploy automatically via `.github/workflows/deploy.yml`:

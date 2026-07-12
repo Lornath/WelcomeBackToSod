@@ -132,8 +132,10 @@
 
   // -------- reputation helpers (shared) --------
   // Standings (cumulative bar size for each level)
-  const STANDING_NAMES = ['neutral', 'friendly', 'honored', 'revered', 'exalted'];
+  const STANDING_NAMES = ['hostile', 'unfriendly', 'neutral', 'friendly', 'honored', 'revered', 'exalted'];
   const STANDING_SIZE = {
+    hostile: 3000,    // hostile -> unfriendly
+    unfriendly: 3000, // unfriendly -> neutral
     neutral: 3000,    // neutral -> friendly
     friendly: 6000,   // friendly -> honored
     honored: 12000,   // honored -> revered
@@ -151,12 +153,17 @@
   }
 
   function currentStandingMax(idx) {
-    if (idx >= 4) return 0;
-    return STANDING_SIZE[STANDING_NAMES[idx]];
+    return STANDING_SIZE[STANDING_NAMES[idx]] || 0;
   }
 
   const fmtInt = (n) => (n == null ? '—' : Math.ceil(n).toLocaleString('en-US'));
   const fmtGold = (n) => (n == null ? '—' : Math.ceil(n).toLocaleString('en-US') + 'g');
+  const fmtStacks = (n, stackSize) => {
+    if (n == null) return '—';
+    const count = Math.ceil(n);
+    const stacks = Math.ceil(count / stackSize);
+    return `${count.toLocaleString('en-US')} (${stacks.toLocaleString('en-US')} ${stacks === 1 ? 'stack' : 'stacks'})`;
+  };
 
   // -------- ZG reputation calculator --------
   const REP_PER_BIJOU = 125;
@@ -186,8 +193,8 @@
       if (isNaN(price) || price < 0) price = 0;
 
       const targets = ['friendly', 'honored', 'revered', 'exalted'];
-      targets.forEach((target, i) => {
-        const targetIdx = i + 1;
+      targets.forEach((target) => {
+        const targetIdx = STANDING_NAMES.indexOf(target);
         const row = resultsEl.querySelector(`tr[data-target="${target}"]`);
         if (!row) return;
 
@@ -267,6 +274,83 @@
       });
       updateRow(row);
     });
+  }
+
+  // -------- generic (commendation signet) reputation calculator --------
+  const REP_PER_SIGNET = 7.5;       // 10 signets -> 75 rep
+  const BANDAGES_PER_SIGNET = 2;    // 20 bandages -> 10 signets
+  const RUNECLOTH_PER_BANDAGE = 1;  // 1 runecloth -> 1 bandage
+  const RUNECLOTH_STACK = 20;       // runecloth / bandages stack in 20s
+  const SIGNET_STACK = 100;         // commendation signets stack in 100s
+  const RUNECLOTH_PRICE_KEY = 'runeclothPrice';
+
+  const sigStandingEl = document.getElementById('sig-standing');
+  const sigProgressEl = document.getElementById('sig-progress');
+  const sigProgressMaxEl = document.getElementById('sig-progress-max');
+  const sigPriceEl = document.getElementById('sig-price');
+  const sigResultsEl = document.getElementById('sig-results');
+
+  if (sigStandingEl && sigProgressEl && sigPriceEl && sigResultsEl) {
+    function updateSig() {
+      const currentIdx = parseInt(sigStandingEl.value, 10);
+      const max = currentStandingMax(currentIdx);
+
+      // clamp progress to [0, max]
+      let progress = parseInt(sigProgressEl.value, 10);
+      if (isNaN(progress) || progress < 0) progress = 0;
+      if (max > 0 && progress > max) progress = max;
+
+      sigProgressMaxEl.textContent = max > 0 ? `/ ${max.toLocaleString('en-US')}` : '(maxed)';
+
+      let price = parseFloat(sigPriceEl.value);
+      if (isNaN(price) || price < 0) price = 0;
+
+      // remember a valid price for next visit
+      if (sigPriceEl.value !== '' && !isNaN(parseFloat(sigPriceEl.value))) {
+        try { localStorage.setItem(RUNECLOTH_PRICE_KEY, sigPriceEl.value); } catch { /* ignore */ }
+      }
+
+      const targets = ['unfriendly', 'neutral', 'friendly', 'honored', 'revered', 'exalted'];
+      targets.forEach((target) => {
+        const targetIdx = STANDING_NAMES.indexOf(target);
+        const row = sigResultsEl.querySelector(`tr[data-target="${target}"]`);
+        if (!row) return;
+
+        const cells = row.querySelectorAll('td');
+
+        if (targetIdx <= currentIdx) {
+          row.classList.add('unreachable');
+          cells[0].textContent = 'achieved';
+          cells[1].textContent = '—';
+          cells[2].textContent = '—';
+          return;
+        }
+
+        row.classList.remove('unreachable');
+        const repNeeded = repToTarget(currentIdx, progress, targetIdx);
+        const signets = repNeeded / REP_PER_SIGNET;
+        const bandages = signets * BANDAGES_PER_SIGNET;
+        const runecloth = bandages * RUNECLOTH_PER_BANDAGE;
+        const gold = runecloth * price;
+
+        // runecloth and bandages are 1:1, so they share a column
+        cells[0].textContent = fmtStacks(runecloth, RUNECLOTH_STACK);
+        cells[1].textContent = fmtStacks(signets, SIGNET_STACK);
+        cells[2].textContent = fmtGold(gold);
+      });
+    }
+
+    // restore the last-used runecloth price
+    try {
+      const savedPrice = localStorage.getItem(RUNECLOTH_PRICE_KEY);
+      if (savedPrice !== null && savedPrice !== '') sigPriceEl.value = savedPrice;
+    } catch { /* ignore */ }
+
+    [sigStandingEl, sigProgressEl, sigPriceEl].forEach((el) => {
+      el.addEventListener('input', updateSig);
+      el.addEventListener('change', updateSig);
+    });
+    updateSig();
   }
 
   // -------- shareable subsection anchors --------
