@@ -399,4 +399,112 @@
 
     h.appendChild(link);
   });
+
+  // -------- info tooltips --------
+  // Author a note inline right after the word it annotates:
+  //   word<span class="tip">the note, may contain <a>links</a></span>
+  // Here we replace the span's contents with an (i) marker and a
+  // popover bubble holding that note.
+  (function () {
+    const tips = document.querySelectorAll('main .tip');
+    if (!tips.length) { return; }
+
+    let uid = 0;
+    let openTip = null;
+
+    const close = (tip) => {
+      if (!tip) { return; }
+      tip.classList.remove('is-open');
+      const icon = tip.querySelector('.tip__icon');
+      if (icon) { icon.setAttribute('aria-expanded', 'false'); }
+      if (openTip === tip) { openTip = null; }
+    };
+
+    // Nudge the bubble back on-screen if it would spill past a viewport
+    // edge, and flip it below the marker when there's no room above.
+    const position = (tip) => {
+      const bubble = tip.querySelector('.tip__bubble');
+      if (!bubble) { return; }
+      bubble.classList.remove('tip__bubble--below');
+      bubble.style.transform = 'translateX(-50%)';
+      bubble.style.setProperty('--tip-caret', '0px');
+
+      const margin = 8;
+      const rect = bubble.getBoundingClientRect();
+      let shift = 0;
+      if (rect.left < margin) {
+        shift = margin - rect.left;
+      } else if (rect.right > window.innerWidth - margin) {
+        shift = (window.innerWidth - margin) - rect.right;
+      }
+      if (shift) {
+        // Keep the caret under the marker, but clamp it inside the bubble.
+        const half = rect.width / 2 - 10;
+        const caret = Math.max(-half, Math.min(half, -shift));
+        bubble.style.transform = 'translateX(calc(-50% + ' + shift + 'px))';
+        bubble.style.setProperty('--tip-caret', caret + 'px');
+      }
+      if (rect.top < margin) { bubble.classList.add('tip__bubble--below'); }
+    };
+
+    tips.forEach((tip) => {
+      const note = tip.innerHTML.trim();
+      if (!note) { return; }
+      tip.innerHTML = '';
+      uid += 1;
+      const bubbleId = 'tip-' + uid;
+
+      const icon = document.createElement('button');
+      icon.type = 'button';
+      icon.className = 'tip__icon';
+      icon.textContent = 'i';
+      icon.setAttribute('aria-label', 'More information');
+      icon.setAttribute('aria-expanded', 'false');
+      icon.setAttribute('aria-describedby', bubbleId);
+
+      const bubble = document.createElement('span');
+      bubble.className = 'tip__bubble';
+      bubble.id = bubbleId;
+      bubble.setAttribute('role', 'tooltip');
+      bubble.innerHTML = note;
+
+      tip.append(icon, bubble);
+      tip.classList.add('tip--ready');
+
+      // Position before it's revealed on hover or keyboard focus.
+      icon.addEventListener('mouseenter', () => position(tip));
+      icon.addEventListener('focus', () => position(tip));
+
+      // Click/tap toggles it open (the mobile path).
+      icon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = tip.classList.contains('is-open');
+        if (openTip && openTip !== tip) { close(openTip); }
+        if (isOpen) {
+          close(tip);
+        } else {
+          tip.classList.add('is-open');
+          icon.setAttribute('aria-expanded', 'true');
+          openTip = tip;
+          position(tip);
+        }
+      });
+
+      // Clicks inside the bubble (e.g. a link) shouldn't close it.
+      bubble.addEventListener('click', (e) => e.stopPropagation());
+    });
+
+    // A tap/click anywhere else dismisses the open tip.
+    document.addEventListener('click', () => { if (openTip) { close(openTip); } });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && openTip) {
+        const icon = openTip.querySelector('.tip__icon');
+        close(openTip);
+        if (icon) { icon.focus(); }
+      }
+    });
+
+    window.addEventListener('resize', () => { if (openTip) { position(openTip); } });
+  })();
 })();

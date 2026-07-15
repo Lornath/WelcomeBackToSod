@@ -1236,6 +1236,38 @@ pre.code-small {
   color: var(--rep-color--exalted);
 }
 
+/* Inline reputation-standing colors. Use on a span in body copy, e.g.
+   <span class="rep-friendly">Friendly</span>. Adapts to light/dark via
+   the --rep-color--* vars. Scoped to `main` to match the rest of the
+   file and stay out of Wowhead's popups. */
+main .rep-hostile {
+  color: var(--rep-color--hostile);
+}
+
+main .rep-unfriendly {
+  color: var(--rep-color--unfriendly);
+}
+
+main .rep-neutral {
+  color: var(--rep-color--neutral);
+}
+
+main .rep-friendly {
+  color: var(--rep-color--friendly);
+}
+
+main .rep-honored {
+  color: var(--rep-color--honored);
+}
+
+main .rep-revered {
+  color: var(--rep-color--revered);
+}
+
+main .rep-exalted {
+  color: var(--rep-color--exalted);
+}
+
 .calc-table td {
   font-variant-numeric: tabular-nums;
   font-size: 16px;
@@ -1397,6 +1429,149 @@ pre.code-small {
   .brand-title {
     font-size: 15px;
   }
+}
+
+/* ===========================================================
+   Info tooltips
+   Author inline notes by wrapping the note right after the word
+   it annotates:  <span class="tip">the note text</span>. app.js
+   swaps the span's contents for an (i) marker plus a popover
+   bubble holding the note (which may contain links/markup).
+   Scoped to `main` so we never touch Wowhead's own popups.
+   =========================================================== */
+
+main .tip {
+  position: relative;
+  display: inline;
+}
+
+/* Until app.js enhances it, keep the raw note out of the flow so
+   there's no flash of un-iconized text. JS adds .tip--ready. */
+main .tip:not(.tip--ready) {
+  display: none;
+}
+
+.tip__icon {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15em;
+  height: 1.15em;
+  margin: 0 0.12em;
+  padding: 0;
+  vertical-align: baseline;
+  transform: translateY(-0.08em);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bg-3);
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: 0.72em;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1;
+  cursor: help;
+  user-select: none;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+.tip__icon:hover,
+.tip.is-open .tip__icon {
+  background: var(--gold);
+  color: var(--btn-text);
+  border-color: var(--gold);
+}
+
+.tip__icon:focus-visible {
+  outline: none;
+  background: var(--gold);
+  color: var(--btn-text);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px var(--bg-0), 0 0 0 4px var(--gold);
+}
+
+.tip__bubble {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 9px);
+  transform: translateX(-50%);
+  z-index: 60;
+  width: max-content;
+  max-width: min(300px, 80vw);
+  padding: 8px 11px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  color: var(--ink-dim);
+  box-shadow: var(--shadow);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+  text-indent: 0;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.14s ease, visibility 0.14s ease;
+}
+
+.tip__bubble a {
+  color: var(--azure);
+}
+
+/* caret — two stacked triangles so the 1px border reads cleanly */
+.tip__bubble::before,
+.tip__bubble::after {
+  content: "";
+  position: absolute;
+  left: calc(50% + var(--tip-caret, 0px));
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+}
+
+.tip__bubble::after {
+  top: 100%;
+  border-top-color: var(--line-strong);
+}
+
+.tip__bubble::before {
+  top: calc(100% - 1px);
+  border-top-color: var(--bg-2);
+  z-index: 1;
+}
+
+/* flipped variant: bubble sits below the marker, caret points up */
+.tip__bubble--below {
+  bottom: auto;
+  top: calc(100% + 9px);
+}
+
+.tip__bubble--below::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: var(--line-strong);
+}
+
+.tip__bubble--below::before {
+  top: auto;
+  bottom: calc(100% - 1px);
+  border-top-color: transparent;
+  border-bottom-color: var(--bg-2);
+}
+
+/* reveal on hover of the marker, keyboard focus, or click-toggle */
+.tip:hover .tip__bubble,
+.tip:focus-within .tip__bubble,
+.tip.is-open .tip__bubble {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {

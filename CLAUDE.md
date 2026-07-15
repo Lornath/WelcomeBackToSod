@@ -4,8 +4,8 @@ Static site, no build step. The files in `src/` are served as-authored.
 
 ## Local dev
 
-`cd src && python -m http.server 8000` — that's the whole local workflow. No
-Node needed for runtime; only for lint.
+`cd src && python -m http.server 8000` to serve the site.  Assume this is already running if you're testing changes.
+Node is only used for lint.
 
 ## Linting
 
