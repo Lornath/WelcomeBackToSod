@@ -65,6 +65,18 @@ No long-lived AWS credentials anywhere. The four config values
 (`AWS_DEPLOY_ROLE_ARN`, `AWS_REGION`, `S3_BUCKET`, `CF_DISTRIBUTION_ID`) are
 GitHub Actions **variables** (not secrets) — they're not sensitive.
 
+## Cache-busting CSS/JS
+
+`index.html` references `styles.css?v=N` and `app.js?v=N`. The deploy serves
+HTML `no-cache` but non-HTML assets with a 1-day `max-age`, so returning
+visitors get the new HTML immediately but keep the old CSS/JS from their
+**browser** cache (the CloudFront edge is already fresh via the deploy's
+invalidation). The `?v=N` query is what busts the browser cache.
+
+**When you make a meaningful change to `src/app.js` or `src/styles.css`, bump
+the `?v=N` on both references in `src/index.html`** (both share one number —
+just increment it). Skip the bump for content-only edits to `index.html`.
+
 ## Things not to do
 
 - Don't add a build step or framework.
