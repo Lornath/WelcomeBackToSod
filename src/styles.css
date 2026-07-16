@@ -1585,6 +1585,32 @@ main .tip:not(.tip--ready) {
   pointer-events: auto;
 }
 
+/* "FIRE CAT" — animated flame text */
+.firecat {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: linear-gradient(0deg, #c33a2c 0%, #ff5a1f 45%, #ff9d2e 70%, #ffd87a 100%);
+  background-size: 100% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: firecat-flicker 1.6s ease-in-out infinite;
+}
+
+@keyframes firecat-flicker {
+
+  0%,
+  100% {
+    background-position: 0 0;
+    filter: drop-shadow(0 0 3px rgba(255, 120, 30, 0.55));
+  }
+
+  50% {
+    background-position: 0 100%;
+    filter: drop-shadow(0 0 8px rgba(255, 90, 20, 0.85));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   *,
