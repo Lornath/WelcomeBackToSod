@@ -28,7 +28,7 @@
     href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=3" />
   <script>
     // Set theme before paint to avoid flash. Honors saved choice, then OS preference.
     (function () {
@@ -127,6 +127,7 @@
               <li><a href="#travel-khonsu">Khonsu Neck</a></li>
               <li><a href="#travel-lhc">LHC Teleport</a></li>
               <li><a href="#travel-hydraxian">Hydraxian Teleport</a></li>
+              <li><a href="#travel-horde-gnomer">Horde Gnomer Teleport</a></li>
             </ol>
           </li>
           <li>
@@ -974,7 +975,7 @@
               <td>26</td>
               <td>4</td> <!-- enchants -->
               <td>4</td> <!-- rings -->
-              <td>1</td>
+              <td>1<span class="tip">mounts <img src="naxx_mounts.png" alt="Naxxramas mount drops"></span></td>
             </tr>
           </tbody>
         </table>
@@ -1503,24 +1504,37 @@
             <strong><a href="https://www.wowhead.com/classic/item=208425/shiny-archaic-vestige" target="_blank"
                 rel="noopener noreferrer">Shiny
                 Archaic Vestige</a></strong> A second hearthstone - <em>account-bound</em>, so mail it to
-            whichever alt is currently active. The <a
+            whichever character is currently active. The <a
               href="https://www.wowhead.com/classic/guide/season-of-discovery/khonsu-boss-strategy-tips" target="_blank"
               rel="noopener noreferrer">Khonsu</a> and <a
               href="https://www.wowhead.com/classic/guide/season-of-discovery/secret-agents-seventeen-guide-walkthrough"
               target="_blank" rel="noopener noreferrer">Secret Agents quests</a> are one of the most fun and
             challenging things to do in SoD,
             highly recommend trying! And you can actually run the last part repeatedly (stand on the lvl 1 character
-            spawn) and get as many of these as you want.
+            spawn) and get as many of these as you want, so <strong>all</strong> of your toon can have one!
           </li>
           <li id="travel-lhc">
-            <strong>Light's Hope Chapel teleport.</strong> Complete SE for a teleport to LHC item <a
+            <strong>Light's Hope Chapel teleport.</strong> Complete the SE quest chain for a teleport to LHC with <a
               href="https://www.wowhead.com/classic-ptr/item=243229/hearthstone-of-the-dawn" target="_blank"
               rel="noopener noreferrer">Hearthstone of the Dawn</a>
           </li>
           <li id="travel-hydraxian">
-            <strong>Hydraxian teleport.</strong> Earn revered with the Hydraxian Waterlords for
+            <strong>Hydraxian teleport.</strong> Earn <span class="rep-revered">revered</span> with the Hydraxian
+            Waterlords for
             an Azshara teleport in the form of <a href="https://www.wowhead.com/classic/item=227925/beacon-of-hydraxis"
               target="_blank" rel="noopener noreferrer">Beacon of Hydraxis</a>
+          </li>
+          <li id="travel-horde-gnomer">
+            <strong>Horde can enable teleporting from Booty Bay to gnomer with a
+              <a href="https://www.wowhead.com/classic/item=9173/goblin-transponder" target="_blank"
+                rel="noopener noreferrer">Goblin Transponder</a>.</strong> While
+            this teleport existed in classic, it's extra useful now due to Gnomer's new status as a level-up raid. Horde
+            need to grab the quest <a href="https://www.wowhead.com/classic/quest=2842/chief-engineer-scooty"
+              target="_blank" rel="noopener noreferrer">Chief Engineer Scooty</a> in Orgirmmar from <a
+              href="https://www.wowhead.com/classic/npc=3413/sovik" target="_blank" rel="noopener noreferrer">Sovik</a>
+            then head to Booty Bay to complete it. If the quest is unavailable, try grabbing the quest
+            <a href="https://www.wowhead.com/classic/quest=2841/rig-wars" target="_blank" rel="noopener noreferrer">Rig
+              Wars</a> from the same NPC first.
           </li>
         </ul>
       </section>
@@ -1537,22 +1551,28 @@
         <ul class="travel">
           <li><strong>Demon Fall Canyon (DFC)</strong> - requires an easy <a href="#attunements">attunement</a>, has
             some good weapons, rings, and
-            trinkets</li>
+            trinkets. The first boss drops one of the items required for KC attune, and a later boss is part of the
+            Pally class weapon quest.</li>
           <li><strong>Karazhan Crypts (KC)</strong> - <a href="#attunements">attunement</a> optional (bonus loot), a
             MUST EXPERIENCE for new SoD
-            players,
-            <strong>not for undergeared players</strong>, has some class BiS items, very strong sanctified items, and a
+            players<span class="tip">I always encourage my groups to let the first-time KCers loot the
+              chests</span>,
+            <strong>not for undergeared players</strong><span class="tip">One of the fights in particular has a timer,
+              so a minimum overall DPS level is required</span>, has some class BiS items, very strong sanctified items,
+            and a
             bunch of enchanting recipes.
           </li>
         </ul>
 
 
         <h3 id="cool-water">Water Walking Boots</h3>
-        <p>Earn <strong>honored</strong> with the Hydraxian Waterlords (see <a href="#bre">BRE event</a>) and grab the
+        <p>Earn <span class="rep-honored">honored</span> with the Hydraxian Waterlords (see <a href="#bre">BRE
+            event</a>) and grab the
           <a href="https://www.wowhead.com/classic/item=227923/water-treads" target="_blank"
             rel="noopener noreferrer">Water Treads</a> from <a
             href="https://www.wowhead.com/classic/npc=13278/duke-hydraxis" target="_blank"
-            rel="noopener noreferrer">Duke Hydraxis</a>
+            rel="noopener noreferrer">Duke Hydraxis</a>. These also let you use your <strong>mount</strong> on the
+          water, so they double as Water Riding boots too!
         </p>
 
         <h3 id="cool-profs">Learn All Alchemy / Blacksmithing / Engineering / Leatherworking Specs</h3>
@@ -1563,10 +1583,8 @@
           spec's different quest.</p>
         <p>For <strong>engineering</strong>, you can use <a
             href="https://www.wowhead.com/classic/item=220775/engineering-exchange-ticket" target="_blank"
-            rel="noopener noreferrer">Engineering Exchange Tickets</a> to buy recipes from the other spec. See the <a
-            href="https://www.wowhead.com/classic/news/new-engineering-questline-in-season-of-discovery-learn-opposite-specialization-338567"
-            target="_blank" rel="noopener noreferrer">wowhead questline guide</a> for details.</p>
-        <p>See the <a href="#professions">Professions section</a> below for more details.</p>
+            rel="noopener noreferrer">Engineering Exchange Tickets</a> to buy recipes from the other spec.</p>
+        <p>See the <a href="#professions">Professions section</a> below for more details on all of these.</p>
 
         <h3 id="cool-buffs">Buyable World Buffs</h3>
         <p>
@@ -2363,13 +2381,51 @@
         <h3 id="prof-engineering">Engineering</h3>
         Coming soon!
         <!--
+ See the <a
+            href="https://www.wowhead.com/classic/news/new-engineering-questline-in-season-of-discovery-learn-opposite-specialization-338567"
+            target="_blank" rel="noopener noreferrer">wowhead questline guide</a> for details.
         the tinkerbox nito boots
         the belt (engi only)
+        new avalon teleport
         -->
 
         <h3 id="prof-leatherworking">Leatherworking</h3>
-        Coming soon!
+        <p>
+          <a href="https://www.wowhead.com/classic/item=15407/cured-rugged-hide" target="_blank"
+            rel="noopener noreferrer">Cured Rugged Hides</a> are always in demand by crafters and as a T3 tier turn-in
+          requirement,
+          so get your <a href="https://www.wowhead.com/classic/item=15846/salt-shaker" target="_blank"
+            rel="noopener noreferrer">Salt Shaker</a> and make (or buy from
+          the AH) the <a href="https://www.wowhead.com/classic/item=15409/refined-deeprock-salt" target="_blank"
+            rel="noopener noreferrer">Refined Deeprock Salts</a> used to make the cured hides.
+        </p>
+        <p>The 3-piece <strong>razorbramble</strong> set is in demand by boosting bears. The recipes are found in
+          AQ20/40/NM Dragons.
+        <ul>
+          <li><a href="https://www.wowhead.com/classic/item=233813/razorbramble-leathers" target="_blank"
+              rel="noopener noreferrer">Razorbramble Leathers</a> - chest
+          </li>
+          <li><a href="https://www.wowhead.com/classic/item=233808/razorbramble-cowl" target="_blank"
+              rel="noopener noreferrer">Razorbramble Cowl</a> - head</li>
+          <li><a href="https://www.wowhead.com/classic/item=233804/razorbramble-shoulderpads" target="_blank"
+              rel="noopener noreferrer">Razorbramble Shoulderpads</a> -
+            shoulders</li>
+        </ul>
+        </p>
+        <p>
+          The <a href="https://www.wowhead.com/classic/item=233802/glowing-chitin-armor-kit" target="_blank"
+            rel="noopener noreferrer">Glowing Chitin Armor Kit</a>
+          for spellcasters and the
+          <a href="https://www.wowhead.com/classic/item=233803/sharpened-chitin-armor-kit" target="_blank"
+            rel="noopener noreferrer">Sharpened Chitin Armor Kit</a>
+          for boosters/tanks are widely used. The patterns for these drop in AQ20/AQ40/NM Dragons. You'll also want to
+          pick up the
+          <a href="https://www.wowhead.com/classic/item=18252/pattern-core-armor-kit" target="_blank"
+            rel="noopener noreferrer">Pattern:Core Armor Kit</a> from
+          MC or the NM Dragons to be able to make the core armor kits as they're reagents for the more advanced ones.
+        </p>
         <!--
+
         the razor set and spike and spell dmg armor kits
         -->
 
@@ -2516,7 +2572,7 @@
   <script>const whTooltips = { colorLinks: true, iconizeLinks: true, renameLinks: false };</script>
   <script src="https://wow.zamimg.com/js/tooltips.js"></script>
 
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 
 </html>

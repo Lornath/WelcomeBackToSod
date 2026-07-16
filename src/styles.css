@@ -1478,7 +1478,7 @@ main .tip:not(.tip--ready) {
 }
 
 .tip__icon:hover,
-.tip.is-open .tip__icon {
+.tip__icon[aria-expanded="true"] {
   background: var(--gold);
   color: var(--btn-text);
   border-color: var(--gold);
@@ -1492,14 +1492,15 @@ main .tip:not(.tip--ready) {
   box-shadow: 0 0 0 2px var(--bg-0), 0 0 0 4px var(--gold);
 }
 
+/* Portaled to <body> by app.js and positioned via JS (fixed to the
+   viewport) so no overflow/backdrop-filter ancestor can clip it. */
 .tip__bubble {
-  position: absolute;
-  left: 50%;
-  bottom: calc(100% + 9px);
-  transform: translateX(-50%);
-  z-index: 60;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
   width: max-content;
-  max-width: min(300px, 80vw);
+  max-width: min(300px, 92vw);
   padding: 8px 11px;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
@@ -1520,6 +1521,22 @@ main .tip:not(.tip--ready) {
   transition: opacity 0.14s ease, visibility 0.14s ease;
 }
 
+/* image / wide-media notes get more room; the image scales to fit */
+.tip__bubble--media {
+  max-width: min(520px, 92vw);
+}
+
+.tip__bubble img {
+  display: block;
+  max-width: 100%;
+  /* cap tall images to the viewport so the bubble always fits on-screen */
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  margin: 4px 0 2px;
+  border-radius: 4px;
+}
+
 .tip__bubble a {
   color: var(--azure);
 }
@@ -1529,7 +1546,7 @@ main .tip:not(.tip--ready) {
 .tip__bubble::after {
   content: "";
   position: absolute;
-  left: calc(50% + var(--tip-caret, 0px));
+  left: var(--tip-caret-x, 50%);
   transform: translateX(-50%);
   border: 6px solid transparent;
 }
@@ -1545,12 +1562,8 @@ main .tip:not(.tip--ready) {
   z-index: 1;
 }
 
-/* flipped variant: bubble sits below the marker, caret points up */
-.tip__bubble--below {
-  bottom: auto;
-  top: calc(100% + 9px);
-}
-
+/* flipped variant: bubble sits below the marker, caret points up
+   (the bubble's top/left are set by JS; this only flips the caret) */
 .tip__bubble--below::after {
   top: auto;
   bottom: 100%;
@@ -1565,10 +1578,8 @@ main .tip:not(.tip--ready) {
   border-bottom-color: var(--bg-2);
 }
 
-/* reveal on hover of the marker, keyboard focus, or click-toggle */
-.tip:hover .tip__bubble,
-.tip:focus-within .tip__bubble,
-.tip.is-open .tip__bubble {
+/* app.js toggles this class to reveal the bubble */
+.tip__bubble.is-visible {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
