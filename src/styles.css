@@ -1038,6 +1038,27 @@ pre.code-small {
   background: var(--bg-2);
 }
 
+.hero-mage-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.hero-mage-container p {
+  margin: 0;
+}
+
+.hero-mage {
+  width: 100px;
+  height: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: var(--bg-2);
+  flex-shrink: 0;
+}
+
 @media (max-width: 1024px) {
   .hero-video {
     position: static;
