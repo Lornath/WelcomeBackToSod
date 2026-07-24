@@ -91,15 +91,6 @@
       (x) => !candidates.some((y) => y !== x && x.el.contains(y.el))
     );
 
-    // Hash preference: clicking a TOC link should stick even when multiple
-    // siblings share the band (grid row of cards).
-    const hashId = location.hash.slice(1);
-    const hashed = hashId ? leaves.find((s) => s.id === hashId) : null;
-    if (hashed) {
-      setActive(hashed.id);
-      return;
-    }
-
     // Among leaves, pick the one whose top is closest to the band line from
     // above (i.e. the most recently passed). Ties (grid row siblings) go to
     // the first in DOM order because the loop only updates on strict >.
@@ -112,7 +103,21 @@
         pick = l;
       }
     }
-    if (pick) setActive(pick.id);
+    if (!pick) return;
+
+    // Hash preference: clicking a TOC link should stick when multiple
+    // siblings share the band (grid row of cards) — but only while the
+    // hashed entry ties with the natural pick. A passed section stays a
+    // candidate forever, so an unconditional preference would freeze the
+    // marker on the clicked entry for the rest of the scroll down.
+    const hashId = location.hash.slice(1);
+    const hashed = hashId && hashId !== pick.id ? leaves.find((s) => s.id === hashId) : null;
+    if (hashed && Math.abs(hashed.el.getBoundingClientRect().top - pickTop) < 2) {
+      setActive(hashed.id);
+      return;
+    }
+
+    setActive(pick.id);
   }
 
   let scheduled = false;

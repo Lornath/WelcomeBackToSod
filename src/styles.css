@@ -40,8 +40,11 @@
   --header-bg-b: rgba(18, 15, 12, 0.86);
   --sidebar-bg-a: rgba(26, 22, 18, 0.6);
   --sidebar-bg-b: rgba(18, 15, 12, 0.4);
-  --section-bg-a: rgba(35, 30, 24, 0.4);
-  --section-bg-b: rgba(18, 15, 12, 0.4);
+  /* Flat/opaque, sampled from the live site's blurred sections (which also
+     picked up a little light from the body glows) so the flat look matches
+     what the (removed) backdrop blur used to produce. */
+  --section-bg-a: #1d1914;
+  --section-bg-b: #171311;
   --body-glow-1: rgba(230, 192, 104, 0.06);
   --body-glow-2: rgba(195, 58, 44, 0.05);
   --link-underline: rgba(95, 163, 224, 0.4);
@@ -105,8 +108,9 @@
   --header-bg-b: rgba(245, 236, 214, 0.86);
   --sidebar-bg-a: rgba(239, 228, 196, 0.7);
   --sidebar-bg-b: rgba(245, 236, 214, 0.4);
-  --section-bg-a: rgba(249, 241, 222, 0.6);
-  --section-bg-b: rgba(239, 228, 196, 0.6);
+  /* Flat/opaque: the old rgba(…, 0.6) values pre-composited over --bg-0. */
+  --section-bg-a: #f7efdb;
+  --section-bg-b: #f1e7cb;
   --body-glow-1: rgba(184, 137, 58, 0.08);
   --body-glow-2: rgba(154, 42, 28, 0.05);
   --link-underline: rgba(42, 90, 142, 0.35);
@@ -194,17 +198,16 @@ body {
   font-size: 16px;
   line-height: 1.5;
   color: var(--ink);
-  background:
-    radial-gradient(1200px 600px at 80% -10%, var(--body-glow-1), transparent 60%),
-    radial-gradient(900px 500px at -10% 30%, var(--body-glow-2), transparent 60%),
-    var(--bg-0);
-  background-attachment: fixed;
+  background: var(--bg-0);
   transition: background-color 0.2s ease, color 0.2s ease;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* parchment "paper" texture via subtle noise — pure CSS */
+/* parchment "paper" texture via subtle noise + ambient glows — pure CSS.
+   Lives on a position:fixed pseudo (its own compositor layer) instead of a
+   fixed body background-attachment, which forces a full repaint per scroll
+   frame. Visually identical: both stay pinned to the viewport. */
 body::before {
   content: "";
   position: fixed;
@@ -212,7 +215,9 @@ body::before {
   pointer-events: none;
   background-image:
     repeating-linear-gradient(0deg, var(--noise-color) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, var(--noise-color) 0 1px, transparent 1px 5px);
+    repeating-linear-gradient(90deg, var(--noise-color) 0 1px, transparent 1px 5px),
+    radial-gradient(1200px 600px at 80% -10%, var(--body-glow-1), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, var(--body-glow-2), transparent 60%);
   z-index: 0;
 }
 
@@ -297,6 +302,12 @@ body::before {
   text-decoration: none;
   font-size: 14px;
   letter-spacing: 0.04em;
+}
+
+/* Strip the dotted link underline from plain header links only — this
+   selector outweighs .share-btn (0,1,1 vs 0,1,0), so without the :not()
+   it would also delete the share buttons' bottom border. */
+.header-links a:not(.share-btn) {
   border-bottom: none;
 }
 
@@ -310,7 +321,11 @@ body::before {
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   width: 34px;
-  height: 30px;
+  /* 31px, not 30: the header's content box is 51px (52px minus its 1px
+     bottom border), so a 30px button centers at y=10.5 — the half-pixel
+     puts the bottom border on a fractional device-pixel row where some
+     DPI scalings anti-alias it away. 31px centers at a whole 10/41. */
+  height: 31px;
   padding: 0;
   cursor: pointer;
   display: inline-flex;
@@ -587,8 +602,9 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 16px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  /* No backdrop-filter here: blurring the backdrop of viewport-filling
+     sections re-renders every scroll frame and janks scrolling. The header
+     keeps its blur — it's only 64px tall. */
   position: relative;
   overflow: hidden;
 }
@@ -1615,6 +1631,9 @@ main .tip:not(.tip--ready) {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* Static glow — animating the drop-shadow forces a main-thread filter
+     re-render every frame for the page's lifetime. */
+  filter: drop-shadow(0 0 5px rgba(255, 105, 25, 0.7));
   animation: firecat-flicker 1.6s ease-in-out infinite;
 }
 
@@ -1623,12 +1642,10 @@ main .tip:not(.tip--ready) {
   0%,
   100% {
     background-position: 0 0;
-    filter: drop-shadow(0 0 3px rgba(255, 120, 30, 0.55));
   }
 
   50% {
     background-position: 0 100%;
-    filter: drop-shadow(0 0 8px rgba(255, 90, 20, 0.85));
   }
 }
 
