@@ -225,7 +225,8 @@
           on top of the
           <a href="https://www.wowhead.com/classic/spell=436412/discoverers-delight" target="_blank"
             rel="noopener noreferrer">Discoverer's Delight</a>
-          buff (+150% XP, +300% quest gold, despite what Wowhead says). This makes it very easy to hit 60 quickly.
+          buff (+150% XP, +300% quest gold, despite what Wowhead says). This makes it very easy to hit 60 quickly<span
+            class="tip">My last character was leveled in less than 2 days /played time without boosting</span>.
 
         </p>
         <p>
@@ -540,14 +541,19 @@
         </div>
 
         <p class="callout">
-          <strong>Solo tier hand-in trick.</strong> You need to be inside a raid instance to redeem the tier tokens for
+          <strong>Solo tier hand-in trick.</strong> You need to be inside a raid instance to redeem the tier tokens
+          for
           MC/BWL/AQ40.
           Once attuned, MC and BWL let you in solo without being in a raid group - just talk to the NPC or click the
           orb.
-          To zone into any other raid instance, macro this and spam as you bounce in and out of the instance portal:
+          <br>
+          <em>update:</em> sadly, this solo instance macro seems to have been broken by the 1.15.9 patch :(<br>
+          <span style="text-decoration: line-through">
+            To zone into any other raid instance, macro this and spam as you bounce in and out of the instance portal:
+            <br>
+            <code>/run InviteUnit("notaunit");C_Timer.After(.25,function() ConvertToRaid() end)</code>
+          </span>
         </p>
-        <pre
-          class="code"><code>/run InviteUnit("notaunit");C_Timer.After(.25,function() ConvertToRaid() end)</code></pre>
 
         <h4>Main items and prices at reals vendor</h4>
         <table class="tier-table">
@@ -991,7 +997,8 @@
               <td>26</td>
               <td>4</td> <!-- enchants -->
               <td>4</td> <!-- rings -->
-              <td>1<span class="tip">mounts <img src="naxx_mounts.jpg" alt="Naxxramas mount drops" width="1000" height="1029" loading="lazy"></span></td>
+              <td>1<span class="tip">mounts <img src="naxx_mounts.jpg" alt="Naxxramas mount drops" width="1000"
+                    height="1029" loading="lazy"></span></td>
             </tr>
           </tbody>
         </table>
@@ -1076,17 +1083,17 @@
           You'll
           need<span class="tip">If you progress the quest just far enough to get the
             temporary 10-minute disguise from the NPC you can use that instead</span> to get this disguise to do
-          jostled
-          chalice fragment
-          quest (see below).
+          jostled chalice fragment quest (see below).
         </p>
         <p> There's a <a href="https://www.wowhead.com/classic/guide/season-of-discovery/scarlet-uniform-crafting"
             target="_blank" rel="noopener noreferrer">full breakdown at Wowhead</a></p>
 
         <h4 id="jostled-chalice-fragment">Weekly Jostled Chalice Fragment Quest</h4>
         <p>Every <strong>3 weeks</strong> you are guaranteed a free SE tier piece, even without doing the raid. By
-          doing the weekly Prove Your Worth:
-          quest at <a href="https://www.wowhead.com/classic/npc=240248/bryon-steelblade" target="_blank"
+          doing the weekly Prove Your Worth:<span class="tip">You're asked to either craft a <em>specific</em> piece of
+            scarlet gear, OR you can destroy <strong>any</strong> scarlet piece - just buy the cheapest wrist piece off
+            the AH</span>
+          quest from <a href="https://www.wowhead.com/classic/npc=240248/bryon-steelblade" target="_blank"
             rel="noopener noreferrer">Byron
             Steelblade</a> in New
           Avalon (disguise required) you earn a <a href="https://www.wowhead.com/classic/item=239248/scarlet-junkbox"
@@ -2556,8 +2563,8 @@
             Manual</a> and is part of the N.A. engi quests mentioned above.
         </p>
         <div class="hero-mage-container">
-          <img class="hero-mage" src="firemittenz.png" alt="Firemittenz the gnome mage engineer"
-            width="200" height="264" loading="lazy" />
+          <img class="hero-mage" src="firemittenz.png" alt="Firemittenz the gnome mage engineer" width="200"
+            height="264" loading="lazy" />
           <p>
             Hi, I'm Firemittenz, and I'm an engineer. My favorite engineering item
             is the <a href="https://www.wowhead.com/classic/item=10716/gnomish-shrink-ray" target="_blank"
@@ -2700,11 +2707,17 @@
               rel="noopener noreferrer">SoD Raid Guides</a> are great SoD-specific,
             factual references for most of the raids, including the "hard modes" for MC/BWL/(Naxx - WIP).
           </li>
-          <li>Very detailed google docs with in-depth class specifics: <a
-              href="https://docs.google.com/document/d/1BCCkILiz9U-VcX7489WGam2cK_Dm8InahnpQ3bS-UxA/edit?tab=t.0#heading=h.29247jxe4j"
-              target="_blank" rel="noopener noreferrer">Rogue Tank</a> and <a
-              href="https://docs.google.com/document/d/e/2PACX-1vQuTu8ROpjt5FOl1yxWv5tp_Qq72EKtMwAHrpdtWz3cn2JVNOwqdKq5-yAADlAA8NIsFjR1jw3J-p5T/pub"
-              target="_blank" rel="noopener noreferrer">Feral DPS</a> guides
+          <li>Very detailed google docs with in-depth class specifics, found in various discords:
+            <ul>
+              <li><a
+                  href="https://docs.google.com/document/d/1BCCkILiz9U-VcX7489WGam2cK_Dm8InahnpQ3bS-UxA/edit?tab=t.0#heading=h.29247jxe4j"
+                  target="_blank" rel="noopener noreferrer">Rogue Tank</a></li>
+              <li><a
+                  href="https://docs.google.com/document/d/e/2PACX-1vQuTu8ROpjt5FOl1yxWv5tp_Qq72EKtMwAHrpdtWz3cn2JVNOwqdKq5-yAADlAA8NIsFjR1jw3J-p5T/pub"
+                  target="_blank" rel="noopener noreferrer">Feral DPS</a></li>
+              <li><a href="https://docs.google.com/document/d/1xlKl4vVBVbdaBLmnX2S3Qp-P7IplHUyS9_lsfWG3ZrI"
+                  target="_blank" rel="noopener noreferrer">Priest Healing</a></li>
+            </ul>
           </li>
           <li>Slightly, ummm, less "in-depth" but a classic: <a
               href="https://tagn.wordpress.com/2009/07/20/alamo-teechs-u-2-play-durid/" target="_blank"
@@ -2747,10 +2760,13 @@
           <li><a href="https://www.curseforge.com/wow/addons/gargul" target="_blank"
               rel="noopener noreferrer">Gargul</a> - nearly every group uses this for loot and it makes things a ton
             easier</li>
-          <li><a href="https://www.curseforge.com/wow/addons/itemrack-classic" target="_blank"
-              rel="noopener noreferrer">ItemRack</a> - between dual-spec and sanctified gear, you'll probably find
-            yourself swapping gear somewhat
-            frequently. <em>note: this hasn't been updated in years, but still seems to work</em>. There are other gear
+          <li><a href="https://www.curseforge.com/wow/addons/itemrack-season-of-discovery-sod" target="_blank"
+              rel="noopener noreferrer">ItemRack - Season of Discovery (SoD)</a> or <a
+              href="https://www.curseforge.com/wow/addons/itemrack-anniversary" target="_blank"
+              rel="noopener noreferrer">ItemRack Anniversary</a> - two forks of the venerable ItemRack, between
+            dual-spec and sanctified
+            gear, you'll probably find
+            yourself swapping gear somewhat frequently. There are other gear
             set addons too - find one you like.</li>
           <li><a href="https://www.curseforge.com/wow/addons/weakauras-2" target="_blank"
               rel="noopener noreferrer">WeakAuras</a> - this enables so many small QoL, <strong>shareable in
@@ -2842,8 +2858,8 @@
             target="_blank" rel="noopener noreferrer">this reddit post</a>
         </p>
         <p>
-          <img alt="firekittenz sitting on throne" src="firekittenz_throne.jpg"
-            width="1500" height="845" loading="lazy" style="max-width: 100%; height: auto;" />
+          <img alt="firekittenz sitting on throne" src="firekittenz_throne.jpg" width="1500" height="845" loading="lazy"
+            style="max-width: 100%; height: auto;" />
           Thanks!<br>
           -Firekittenz
         </p>
